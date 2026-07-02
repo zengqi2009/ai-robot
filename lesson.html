@@ -112,7 +112,7 @@
             }
 
             // 获取课程信息
-            const course = getCoursesData().find(c => c.id === courseId);
+            const course = coursesData.find(c => c.id === courseId);
             if (!course) {
                 document.getElementById('loadingMsg').innerHTML = '<div class="icon">❌</div><p>未找到该课程</p>';
                 return;

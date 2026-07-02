@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>课程体系 - AI机器人·成长营</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        body { background: #f0ede4; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .page-header {
+            background: linear-gradient(135deg, #1a2a6c, #2d4a8e); border-radius: 20px; padding: 20px 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; color: #fff;
+        }
+        .page-header h1 { font-size: 24px; font-weight: 800; font-family: 'Noto Serif SC', serif; color: #fff; }
+        .page-header a {
+            padding: 8px 24px; border-radius: 30px; text-decoration: none;
+            font-size: 14px; font-weight: 600; background: #FFD700; color: #1a2a6c;
+        }
+        .page-header a:hover { background: #f0c800; }
+
+        .table-wrap {
+            overflow-x: auto; background: #fffcf5; border-radius: 16px;
+            border: 1px solid #e8e0d5; padding: 4px;
+        }
+        table {
+            width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1200px;
+        }
+        th {
+            background: #e8e0d5; padding: 10px 8px; text-align: center;
+            font-weight: 700; color: #4a3a2a; font-size: 12px;
+            border-bottom: 2px solid #d0c4b4; white-space: nowrap;
+        }
+        td {
+            padding: 8px; border-bottom: 1px solid #f0e8dc; color: #3a2a1a;
+            vertical-align: top; line-height: 1.5;
+        }
+        tr:hover td { background: #faf5ea; }
+        .course-name { font-weight: 700; color: #2d4a8e; white-space: nowrap; }
+        .lesson-num { text-align: center; font-weight: 600; color: #7a6a5a; white-space: nowrap; }
+        .role-cell { font-weight: 600; color: #4a3a2a; white-space: nowrap; }
+        .col-skill { font-size: 12px; }
+        .col-outcome { font-size: 12px; color: #5a7a5a; }
+        .col-content { font-size: 12px; color: #5a4a3a; }
+
+        .stage-basic { background: #f0f8f0; }
+        .stage-inter { background: #f0f4fa; }
+        .stage-adv { background: #f5f0fa; }
+
+        .stage-badge {
+            display: inline-block; padding: 2px 10px; border-radius: 20px;
+            font-size: 11px; font-weight: 700; color: #fff;
+        }
+        .sb-basic { background: #5a9a5a; }
+        .sb-inter { background: #4a7aba; }
+        .sb-adv { background: #8a4aba; }
+
+        .back-link {
+            display: inline-block; margin-top: 16px; padding: 10px 24px;
+            border-radius: 30px; background: #fffcf5; border: 1px solid #e8e0d5;
+            text-decoration: none; font-size: 14px; font-weight: 600; color: #4a3a2a;
+        }
+        .back-link:hover { background: #f0e8dc; }
+        .stats-bar {
+            text-align: center; color: #7a6a5a; font-size: 14px; margin-bottom: 16px;
+        }
+        .demo-link {
+            display: inline-block; margin-top: 16px; margin-left: 12px; padding: 10px 24px;
+            border-radius: 30px; background: #E67E22; color: #fff;
+            text-decoration: none; font-size: 14px; font-weight: 600;
+        }
+        .demo-link:hover { background: #d4701a; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>🤖 AI机器人·成长营 — 课程体系</h1>
+            <div>
+                <a href="demo.html">🎯 招生展示课</a>
+                <a href="index.html" style="margin-left:8px;background:rgba(255,255,255,0.2);color:#fff;">← 返回首页</a>
+            </div>
+        </div>
+        <div class="stats-bar">共 <strong>12</strong> 门课程 · <strong>48</strong> 课时 · 三个成长阶段 · 每课60分钟</div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>课程进阶</th>
+                        <th>年龄分阶</th>
+                        <th>课程名称</th>
+                        <th>课次</th>
+                        <th>角色主题</th>
+                        <th>教学目标（技能层面）</th>
+                        <th>核心能力（技能标签）</th>
+                        <th>当堂产出</th>
+                        <th>课程内容（技能训练线）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ===== R01 ===== -->
+                    <tr class="stage-basic">
+                        <td rowspan="16" style="text-align:center;font-weight:700;color:#5a9a5a;">AI<br/>机<br/>器<br/>人</td>
+                        <td rowspan="16" style="text-align:center;font-weight:600;">5-8岁<br/>启蒙期</td>
+                        <td rowspan="4" class="course-name">R01：机器人初探与感知世界</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">机器人认知师 <span style="font-size:11px;color:#9a8a7a;">（零件探索者）</span></td>
+                        <td class="col-skill">了解机器人三要素，认识积木套件基本零件</td>
+                        <td class="col-skill">机器人认知 · 零件识别</td>
+                        <td class="col-outcome">说出机器人三要素</td>
+                        <td class="col-content">认识机器人概念→三要素讲解→零件探索→分类收纳</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">搭建工程师 <span style="font-size:11px;color:#9a8a7a;">（结构搭建者）</span></td>
+                        <td class="col-skill">学习搭建基础小车结构，安装马达和轮子</td>
+                        <td class="col-skill">结构搭建 · 马达安装</td>
+                        <td class="col-outcome">搭建四轮小车</td>
+                        <td class="col-content">认识底盘结构→安装马达→安装轮子→测试稳定性</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">运动控制师 <span style="font-size:11px;color:#9a8a7a;">（路线规划者）</span></td>
+                        <td class="col-skill">使用马达控制小车前进、后退、转弯</td>
+                        <td class="col-skill">运动控制 · 指令序列</td>
+                        <td class="col-outcome">小车沿S形路线行驶</td>
+                        <td class="col-content">前进后退指令→转弯控制→组合指令→S形路线挑战</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">传感器应用师 <span style="font-size:11px;color:#9a8a7a;">（颜色识别者）</span></td>
+                        <td class="col-skill">使用颜色传感器完成基础分类任务</td>
+                        <td class="col-skill">传感器应用 · 颜色识别</td>
+                        <td class="col-outcome">"红停绿行"任务</td>
+                        <td class="col-content">认识颜色传感器→检测颜色→编程响应→红停绿行挑战</td>
+                    </tr>
+
+                    <!-- ===== R02 ===== -->
+                    <tr class="stage-basic">
+                        <td rowspan="4" class="course-name">R02：声音魔法师</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">声音探索家 <span style="font-size:11px;color:#9a8a7a;">（信号检测者）</span></td>
+                        <td class="col-skill">理解声音是信号，认识声音传感器和蜂鸣器</td>
+                        <td class="col-skill">声音认知 · 传感器使用</td>
+                        <td class="col-outcome">检测不同音量并显示</td>
+                        <td class="col-content">声音产生原理→声音传感器→音量检测→屏幕显示</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">声控编程师 <span style="font-size:11px;color:#9a8a7a;">（口令控制者）</span></td>
+                        <td class="col-skill">用声音控制机器人动作</td>
+                        <td class="col-skill">声控编程 · 条件触发</td>
+                        <td class="col-outcome">声控小车（拍手前进）</td>
+                        <td class="col-content">声音阈值设定→条件判断→声控触发→拍手控制小车</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">音乐编程师 <span style="font-size:11px;color:#9a8a7a;">（旋律创作者）</span></td>
+                        <td class="col-skill">用蜂鸣器演奏简单旋律</td>
+                        <td class="col-skill">音乐编程 · 频率控制</td>
+                        <td class="col-outcome">演奏《小星星》前两句</td>
+                        <td class="col-content">认识蜂鸣器→音调与频率→编写旋律→演奏歌曲</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">互动剧场导演 <span style="font-size:11px;color:#9a8a7a;">（表演设计师）</span></td>
+                        <td class="col-skill">综合声控和蜂鸣器设计互动表演</td>
+                        <td class="col-skill">综合创作 · 表演设计</td>
+                        <td class="col-outcome">声控互动小剧场</td>
+                        <td class="col-content">剧本设计→声控触发编排→蜂鸣器配乐→完整表演</td>
+                    </tr>
+
+                    <!-- ===== R03 ===== -->
+                    <tr class="stage-basic">
+                        <td rowspan="4" class="course-name">R03：机械小达人</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">杠杆工程师 <span style="font-size:11px;color:#9a8a7a;">（力学探索者）</span></td>
+                        <td class="col-skill">理解杠杆原理，搭建杠杆装置</td>
+                        <td class="col-skill">杠杆原理 · 结构搭建</td>
+                        <td class="col-outcome">撬起重物的杠杆装置</td>
+                        <td class="col-content">认识杠杆三要素→支点实验→力臂调整→重物挑战</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">齿轮传动师 <span style="font-size:11px;color:#9a8a7a;">（速度调节者）</span></td>
+                        <td class="col-skill">理解齿轮传动原理</td>
+                        <td class="col-skill">齿轮传动 · 速度变换</td>
+                        <td class="col-outcome">二级齿轮减速装置</td>
+                        <td class="col-content">认识齿轮→加速/减速→改变方向→搭建减速装置</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">滑轮设计师 <span style="font-size:11px;color:#9a8a7a;">（升降控制者）</span></td>
+                        <td class="col-skill">理解滑轮原理，搭建滑轮升降系统</td>
+                        <td class="col-skill">滑轮原理 · 升降系统</td>
+                        <td class="col-outcome">手动滑轮升降机</td>
+                        <td class="col-content">认识滑轮→定滑轮/动滑轮→滑轮组→升降机搭建</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">机械手臂设计师 <span style="font-size:11px;color:#9a8a7a;">（综合创造者）</span></td>
+                        <td class="col-skill">综合杠杆、齿轮、滑轮搭建机械手臂</td>
+                        <td class="col-skill">综合机械 · 手臂设计</td>
+                        <td class="col-outcome">能抓取轻物的机械手臂</td>
+                        <td class="col-content">机械手臂设计→关节搭建→抓取机构→抓取挑战</td>
+                    </tr>
+
+                    <!-- ===== R04 ===== -->
+                    <tr class="stage-basic">
+                        <td rowspan="4" class="course-name">R04：AI小侦探</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">视觉认知师 <span style="font-size:11px;color:#9a8a7a;">（摄像头操作者）</span></td>
+                        <td class="col-skill">了解AI视觉概念，认识摄像头模块</td>
+                        <td class="col-skill">AI视觉认知 · 摄像头使用</td>
+                        <td class="col-outcome">摄像头拍摄并显示</td>
+                        <td class="col-content">AI视觉概念→摄像头安装→图像采集→屏幕显示</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">人脸识别师 <span style="font-size:11px;color:#9a8a7a;">（身份认证者）</span></td>
+                        <td class="col-skill">体验人脸识别功能</td>
+                        <td class="col-skill">人脸识别 · 身份认证</td>
+                        <td class="col-outcome">识别3个人并说出名字</td>
+                        <td class="col-content">人脸检测→人脸录入→人脸比对→身份识别</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">物品分类师 <span style="font-size:11px;color:#9a8a7a;">（AI分类者）</span></td>
+                        <td class="col-skill">用AI视觉模块分类物品</td>
+                        <td class="col-skill">物品分类 · AI识别</td>
+                        <td class="col-outcome">正确分类5种物品</td>
+                        <td class="col-content">物品拍摄→特征提取→模型分类→结果验证</td>
+                    </tr>
+                    <tr class="stage-basic">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">目标跟随师 <span style="font-size:11px;color:#9a8a7a;">（追踪控制者）</span></td>
+                        <td class="col-skill">让机器人跟随指定目标移动</td>
+                        <td class="col-skill">目标跟随 · 追踪控制</td>
+                        <td class="col-outcome">跟随彩色球移动</td>
+                        <td class="col-content">目标识别→坐标追踪→运动控制→跟随挑战</td>
+                    </tr>
+
+                    <!-- ===== R05 ===== -->
+                    <tr class="stage-inter">
+                        <td rowspan="16" style="text-align:center;font-weight:700;color:#4a7aba;">AI<br/>机<br/>器<br/>人</td>
+                        <td rowspan="16" style="text-align:center;font-weight:600;">9-12岁<br/>成长期</td>
+                        <td rowspan="4" class="course-name">R05：机器人编程与AI感知</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">系统架构师 <span style="font-size:11px;color:#9a8a7a;">（硬件认知者）</span></td>
+                        <td class="col-skill">理解机器人传感器网络与控制器架构</td>
+                        <td class="col-skill">系统架构 · 硬件认知</td>
+                        <td class="col-outcome">画出系统架构图</td>
+                        <td class="col-content">传感器网络→控制器架构→数据流图→架构图绘制</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">Python编程师 <span style="font-size:11px;color:#9a8a7a;">（硬件控制者）</span></td>
+                        <td class="col-skill">用Python编写基础控制程序</td>
+                        <td class="col-skill">Python编程 · 硬件控制</td>
+                        <td class="col-outcome">LED闪烁和马达调速</td>
+                        <td class="col-content">Python基础→GPIO控制→LED编程→马达PWM调速</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">数据采集师 <span style="font-size:11px;color:#9a8a7a;">（传感器读取者）</span></td>
+                        <td class="col-skill">读取超声波、红外传感器数据</td>
+                        <td class="col-skill">数据采集 · 传感器读取</td>
+                        <td class="col-outcome">实时显示传感器数据</td>
+                        <td class="col-content">超声波测距→红外检测→数据读取→报警触发</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">AI融合工程师 <span style="font-size:11px;color:#9a8a7a;">（视觉集成者）</span></td>
+                        <td class="col-skill">集成AI视觉模块完成物体识别</td>
+                        <td class="col-skill">AI融合 · 视觉集成</td>
+                        <td class="col-outcome">识别5类物体并执行动作</td>
+                        <td class="col-content">AI视觉模块集成→物体识别→动作映射→综合演示</td>
+                    </tr>
+
+                    <!-- ===== R06 ===== -->
+                    <tr class="stage-inter">
+                        <td rowspan="4" class="course-name">R06：仿生机器人创意工坊</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">仿生设计师 <span style="font-size:11px;color:#9a8a7a;">（自然观察者）</span></td>
+                        <td class="col-skill">理解仿生学设计思维，分析生物运动结构</td>
+                        <td class="col-skill">仿生思维 · 生物分析</td>
+                        <td class="col-outcome">仿生草图设计</td>
+                        <td class="col-content">仿生学概念→生物运动观察→结构分析→仿生草图</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">六足机器人工程师 <span style="font-size:11px;color:#9a8a7a;">（多足搭建者）</span></td>
+                        <td class="col-skill">学习舵机控制，搭建六足机器人</td>
+                        <td class="col-skill">舵机控制 · 多足搭建</td>
+                        <td class="col-outcome">行走的六足机器人</td>
+                        <td class="col-content">舵机原理→多足结构设计→步态编程→行走调试</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">仿生鱼设计师 <span style="font-size:11px;color:#9a8a7a;">（水下探索者）</span></td>
+                        <td class="col-skill">设计仿生鱼尾结构，实现水中推进</td>
+                        <td class="col-skill">仿生设计 · 水下推进</td>
+                        <td class="col-outcome">仿生鱼模型游动</td>
+                        <td class="col-content">鱼尾结构分析→防水设计→推进机构→游动测试</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">创意发明家 <span style="font-size:11px;color:#9a8a7a;">（原创设计者）</span></td>
+                        <td class="col-skill">综合所学设计制作原创仿生机器人</td>
+                        <td class="col-skill">原创设计 · 综合创造</td>
+                        <td class="col-outcome">原创仿生机器人+展示</td>
+                        <td class="col-content">创意构思→方案设计→搭建制作→展示汇报</td>
+                    </tr>
+
+                    <!-- ===== R07 ===== -->
+                    <tr class="stage-inter">
+                        <td rowspan="4" class="course-name">R07：智能家居机器人</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">系统规划师 <span style="font-size:11px;color:#9a8a7a;">（方案设计师）</span></td>
+                        <td class="col-skill">了解智能家居场景，设计系统方案</td>
+                        <td class="col-skill">系统设计 · 方案规划</td>
+                        <td class="col-outcome">系统设计方案</td>
+                        <td class="col-content">智能家居场景分析→需求梳理→模块划分→方案设计</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">环境监测师 <span style="font-size:11px;color:#9a8a7a;">（数据采集者）</span></td>
+                        <td class="col-skill">搭建多传感器环境监测系统</td>
+                        <td class="col-skill">多传感器 · 环境监测</td>
+                        <td class="col-outcome">实时环境数据显示</td>
+                        <td class="col-content">温湿度传感器→光照传感器→气体传感器→数据融合显示</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">语音交互设计师 <span style="font-size:11px;color:#9a8a7a;">（声控编程者）</span></td>
+                        <td class="col-skill">实现语音控制与语音反馈功能</td>
+                        <td class="col-skill">语音交互 · 声控编程</td>
+                        <td class="col-outcome">5个语音指令控制</td>
+                        <td class="col-content">语音识别模块→指令映射→语音反馈→场景控制</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">安防系统工程师 <span style="font-size:11px;color:#9a8a7a;">（系统集成者）</span></td>
+                        <td class="col-skill">设计安防逻辑并完成系统联调</td>
+                        <td class="col-skill">安防设计 · 系统联调</td>
+                        <td class="col-outcome">完整智能家居系统</td>
+                        <td class="col-content">安防逻辑设计→异常检测→报警联动→系统集成测试</td>
+                    </tr>
+
+                    <!-- ===== R08 ===== -->
+                    <tr class="stage-inter">
+                        <td rowspan="4" class="course-name">R08：竞技机器人</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">循迹算法师 <span style="font-size:11px;color:#9a8a7a;">（路径跟踪者）</span></td>
+                        <td class="col-skill">理解循迹原理，实现PID循迹控制</td>
+                        <td class="col-skill">循迹算法 · PID控制</td>
+                        <td class="col-outcome">稳定循迹行驶</td>
+                        <td class="col-content">循迹原理→灰度传感器→PID算法→循迹调试</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">避障算法师 <span style="font-size:11px;color:#9a8a7a;">（障碍规避者）</span></td>
+                        <td class="col-skill">学习多传感器融合避障算法</td>
+                        <td class="col-skill">避障算法 · 传感器融合</td>
+                        <td class="col-outcome">自主避开障碍物</td>
+                        <td class="col-content">多传感器融合→障碍检测→避障策略→动态避障</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">竞赛策略师 <span style="font-size:11px;color:#9a8a7a;">（战术规划者）</span></td>
+                        <td class="col-skill">学习竞赛规则，设计对抗策略</td>
+                        <td class="col-skill">竞赛规则 · 策略设计</td>
+                        <td class="col-outcome">竞赛策略方案</td>
+                        <td class="col-content">竞赛规则解读→对手分析→策略设计→方案评审</td>
+                    </tr>
+                    <tr class="stage-inter">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">竞赛选手 <span style="font-size:11px;color:#9a8a7a;">（实战参赛者）</span></td>
+                        <td class="col-skill">综合循迹、避障、策略完成模拟竞赛</td>
+                        <td class="col-skill">综合实战 · 竞赛演练</td>
+                        <td class="col-outcome">完成模拟竞赛任务</td>
+                        <td class="col-content">赛前调试→模拟竞赛→策略调整→赛后总结</td>
+                    </tr>
+
+                    <!-- ===== R09 ===== -->
+                    <tr class="stage-adv">
+                        <td rowspan="16" style="text-align:center;font-weight:700;color:#8a4aba;">AI<br/>机<br/>器<br/>人</td>
+                        <td rowspan="16" style="text-align:center;font-weight:600;">13岁+<br/>硬核期</td>
+                        <td rowspan="4" class="course-name">R09：机器人底层开发与AI核心</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">ROS系统工程师 <span style="font-size:11px;color:#9a8a7a;">（节点通信者）</span></td>
+                        <td class="col-skill">掌握ROS节点通信与架构</td>
+                        <td class="col-skill">ROS架构 · 节点通信</td>
+                        <td class="col-outcome">两个节点间消息通信</td>
+                        <td class="col-content">ROS安装→工作空间→节点创建→话题通信→消息定义</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">SLAM建图师 <span style="font-size:11px;color:#9a8a7a;">（地图构建者）</span></td>
+                        <td class="col-skill">学习SLAM原理，实现激光雷达建图</td>
+                        <td class="col-skill">SLAM建图 · 激光雷达</td>
+                        <td class="col-outcome">完成房间SLAM建图</td>
+                        <td class="col-content">SLAM原理→激光雷达驱动→Gmapping建图→地图保存</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">深度学习工程师 <span style="font-size:11px;color:#9a8a7a;">（YOLO部署者）</span></td>
+                        <td class="col-skill">部署YOLO模型进行实时目标检测</td>
+                        <td class="col-skill">深度学习 · YOLO部署</td>
+                        <td class="col-outcome">实时检测5类物体</td>
+                        <td class="col-content">YOLO模型介绍→模型部署→实时检测→结果可视化</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">自主导航专家 <span style="font-size:11px;color:#9a8a7a;">（综合项目者）</span></td>
+                        <td class="col-skill">综合SLAM+目标检测完成自主导航</td>
+                        <td class="col-skill">自主导航 · 综合集成</td>
+                        <td class="col-outcome">自主导航完整任务</td>
+                        <td class="col-content">建图→定位→路径规划→避障→目标识别→任务完成</td>
+                    </tr>
+
+                    <!-- ===== R10 ===== -->
+                    <tr class="stage-adv">
+                        <td rowspan="4" class="course-name">R10：人形机器人开发</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">运动学分析师 <span style="font-size:11px;color:#9a8a7a;">（数学建模者）</span></td>
+                        <td class="col-skill">理解正向、逆向运动学原理</td>
+                        <td class="col-skill">运动学 · 数学建模</td>
+                        <td class="col-outcome">2自由度机械臂运动学计算</td>
+                        <td class="col-content">坐标系建立→正向运动学→逆向运动学→Python实现</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">步态规划师 <span style="font-size:11px;color:#9a8a7a;">（行走控制者）</span></td>
+                        <td class="col-skill">学习双足行走步态规划方法</td>
+                        <td class="col-skill">步态规划 · 行走控制</td>
+                        <td class="col-outcome">仿真中稳定行走</td>
+                        <td class="col-content">步态周期→重心规划→ZMP稳定→仿真行走调试</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">手势识别工程师 <span style="font-size:11px;color:#9a8a7a;">（动作控制者）</span></td>
+                        <td class="col-skill">实现手势识别并控制机器人动作</td>
+                        <td class="col-skill">手势识别 · 动作映射</td>
+                        <td class="col-outcome">5种手势控制动作</td>
+                        <td class="col-content">手势采集→特征提取→模型识别→动作映射→控制执行</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">表演导演 <span style="font-size:11px;color:#9a8a7a;">（综合创作者）</span></td>
+                        <td class="col-skill">综合运动学、步态、手势完成表演项目</td>
+                        <td class="col-skill">综合创作 · 表演编排</td>
+                        <td class="col-outcome">人形机器人舞蹈+互动</td>
+                        <td class="col-content">表演编排→动作序列→手势互动→完整演出</td>
+                    </tr>
+
+                    <!-- ===== R11 ===== -->
+                    <tr class="stage-adv">
+                        <td rowspan="4" class="course-name">R11：无人机与空中机器人</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">飞行原理师 <span style="font-size:11px;color:#9a8a7a;">（仿真飞行员）</span></td>
+                        <td class="col-skill">理解四旋翼飞行原理与动力学</td>
+                        <td class="col-skill">飞行原理 · 仿真操作</td>
+                        <td class="col-outcome">仿真中起飞和悬停</td>
+                        <td class="col-content">四旋翼原理→动力学模型→仿真环境→起飞悬停练习</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">飞控编程师 <span style="font-size:11px;color:#9a8a7a;">（航线规划者）</span></td>
+                        <td class="col-skill">用Python控制无人机飞行</td>
+                        <td class="col-skill">飞控编程 · 航线规划</td>
+                        <td class="col-outcome">方形航线飞行</td>
+                        <td class="col-content">飞控API→Python控制→航线规划→方形航线飞行</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">AI航拍分析师 <span style="font-size:11px;color:#9a8a7a;">（图像识别者）</span></td>
+                        <td class="col-skill">实现AI航拍与实时图像分析</td>
+                        <td class="col-skill">AI航拍 · 图像分析</td>
+                        <td class="col-outcome">实时识别地面目标</td>
+                        <td class="col-content">航拍图像采集→实时传输→YOLO识别→结果标注</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">搜救任务指挥官 <span style="font-size:11px;color:#9a8a7a;">（任务规划者）</span></td>
+                        <td class="col-skill">综合飞行控制+AI视觉完成模拟搜救</td>
+                        <td class="col-skill">综合任务 · 搜救实战</td>
+                        <td class="col-outcome">自主搜索定位目标</td>
+                        <td class="col-content">搜救场景设定→自主搜索→目标识别→定位报告</td>
+                    </tr>
+
+                    <!-- ===== R12 ===== -->
+                    <tr class="stage-adv">
+                        <td rowspan="4" class="course-name">R12：AI机器人竞赛特训</td>
+                        <td class="lesson-num">1</td>
+                        <td class="role-cell">竞赛设计师 <span style="font-size:11px;color:#9a8a7a;">（方案规划者）</span></td>
+                        <td class="col-skill">掌握竞赛级机器人设计方法与规范</td>
+                        <td class="col-skill">竞赛设计 · 方案规划</td>
+                        <td class="col-outcome">竞赛机器人设计方案</td>
+                        <td class="col-content">竞赛规则分析→机械设计→硬件选型→方案设计</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">2</td>
+                        <td class="role-cell">路径规划算法师 <span style="font-size:11px;color:#9a8a7a;">（算法实现者）</span></td>
+                        <td class="col-skill">熟练运用A*、Dijkstra等路径规划算法</td>
+                        <td class="col-skill">路径规划 · 算法实现</td>
+                        <td class="col-outcome">仿真中最优路径规划</td>
+                        <td class="col-content">A*算法→Dijkstra算法→算法对比→仿真实现</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">3</td>
+                        <td class="role-cell">多机协同工程师 <span style="font-size:11px;color:#9a8a7a;">（通信架构师）</span></td>
+                        <td class="col-skill">理解多机协同通信与群体智能</td>
+                        <td class="col-skill">多机协同 · 群体智能</td>
+                        <td class="col-outcome">双机协同搬运任务</td>
+                        <td class="col-content">通信协议→协同策略→任务分配→双机协同搬运</td>
+                    </tr>
+                    <tr class="stage-adv">
+                        <td class="lesson-num">4</td>
+                        <td class="role-cell">竞赛冠军 <span style="font-size:11px;color:#9a8a7a;">（实战参赛者）</span></td>
+                        <td class="col-skill">综合所有技能参加模拟竞赛</td>
+                        <td class="col-skill">综合实战 · 竞赛冲刺</td>
+                        <td class="col-outcome">完成所有竞赛任务</td>
+                        <td class="col-content">赛前优化→模拟竞赛→问题排查→成绩评定→总结</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <a href="index.html" class="back-link">← 返回首页</a>
+            <a href="demo.html" class="demo-link">🎯 查看招生展示课</a>
+        </div>
+    </div>
+</body>
+</html>

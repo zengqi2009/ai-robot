@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>AI机器人·成长营</title>
+    <link href="https://fonts.googleapis.cn/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Noto+Serif+SC:wght@500;700;900&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- ===== 头部 ===== -->
+        <header class="header">
+            <div class="header-left">
+                <span class="logo">🤖</span>
+                <h1>AI 机器人<em>·成长营</em></h1>
+                <span class="sub">面向5-13岁+的AI机器人课程体系</span>
+            </div>
+            <div class="header-right">
+                <span class="stats-badge">
+                    📚 <span id="totalCourseCount">12</span> 门课程
+                </span>
+                <a href="curriculum.html" class="stats-badge" style="text-decoration:none;cursor:pointer;background:#FFD700;color:#1a2a6c;">
+                    📋 课程体系
+                </a>
+                <a href="demo.html" class="stats-badge" style="text-decoration:none;cursor:pointer;background:#E67E22;color:#fff;">
+                    🎯 招生展示课
+                </a>
+            </div>
+        </header>
+
+        <!-- ===== 筛选切换条 ===== -->
+        <div class="filter-toggle-bar">
+            <button class="filter-toggle-btn" id="filterToggleBtn">
+                <span>🔍</span> 显示筛选
+                <span class="arrow">▼</span>
+            </button>
+            <span class="filter-status" id="filterStatus">筛选已隐藏</span>
+        </div>
+
+        <!-- ===== 筛选栏（初始隐藏） ===== -->
+        <section class="filter-section hidden" id="filterSection">
+            <div class="filter-row">
+
+                <!-- 年龄段筛选 -->
+                <div class="filter-group">
+                    <span class="label">🎯 年龄</span>
+                    <button class="filter-btn age-btn active" data-age="all">全部</button>
+                    <button class="filter-btn age-btn" data-age="5-8">5-8岁</button>
+                    <button class="filter-btn age-btn" data-age="9-12">9-12岁</button>
+                    <button class="filter-btn age-btn" data-age="13+">13岁+</button>
+                </div>
+
+                <div style="width:1px;height:24px;background:var(--rule);flex-shrink:0;"></div>
+
+                <!-- 职业类型筛选 -->
+                <div class="filter-group">
+                    <span class="label">💼 职业</span>
+                    <button class="filter-btn career-btn active" data-career="all">全部</button>
+                    <button class="filter-btn career-btn" data-career="R"><span class="emoji">🔧</span> R</button>
+                    <button class="filter-btn career-btn" data-career="I"><span class="emoji">🔬</span> I</button>
+                    <button class="filter-btn career-btn" data-career="A"><span class="emoji">🎨</span> A</button>
+                    <button class="filter-btn career-btn" data-career="S"><span class="emoji">🤝</span> S</button>
+                    <button class="filter-btn career-btn" data-career="E"><span class="emoji">📈</span> E</button>
+                    <button class="filter-btn career-btn" data-career="C"><span class="emoji">📋</span> C</button>
+                </div>
+
+                <div style="width:1px;height:24px;background:var(--rule);flex-shrink:0;"></div>
+
+                <!-- 知识点筛选 (按钮组) -->
+                <div class="filter-group" id="knowledgeGroup">
+                    <span class="label">🧠 知识点</span>
+                    <div id="knowledgeBtnGroup" style="display:flex;flex-wrap:wrap;gap:5px;">
+                        <!-- 由JS生成 -->
+                    </div>
+                </div>
+
+                <button class="filter-clear" id="clearFiltersBtn">✕ 清除筛选</button>
+            </div>
+        </section>
+
+        <!-- ===== 阶段导航 ===== -->
+        <div class="stage-banner">
+            <div class="stage-icon">🌱</div>
+            <div class="stage-info">
+                <h2>启蒙萌芽 · 5-8岁</h2>
+                <p>感官探索 · 动手建构 · 趣味AI互动 — 积木式机器人套件、图形化编程、基础传感器</p>
+            </div>
+            <span class="stage-badge sb-basic">低阶</span>
+        </div>
+
+        <div class="stage-banner">
+            <div class="stage-icon">🌿</div>
+            <div class="stage-info">
+                <h2>成长进阶 · 9-12岁</h2>
+                <p>系统认知 · 编程控制 · AI算法融合 — Python、Arduino、AI视觉模块</p>
+            </div>
+            <span class="stage-badge sb-inter">中阶</span>
+        </div>
+
+        <div class="stage-banner">
+            <div class="stage-icon">🚀</div>
+            <div class="stage-info">
+                <h2>硬核实训 · 13岁+</h2>
+                <p>全栈开发 · 算法驱动 · 竞赛实战 — ROS、深度学习、Jetson、YOLO</p>
+            </div>
+            <span class="stage-badge sb-adv">高阶</span>
+        </div>
+
+        <!-- ===== 工具栏 ===== -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <span class="count">找到 <strong id="courseCount">12</strong> 门课程</span>
+            </div>
+            <div class="view-toggle">
+                <button class="active" data-view="card" id="viewCardBtn">📇 卡片</button>
+                <button data-view="list" id="viewListBtn">📋 列表</button>
+            </div>
+        </div>
+
+        <!-- ===== 课程列表容器 ===== -->
+        <div class="course-grid" id="courseGrid"></div>
+
+        <!-- ===== 空状态 ===== -->
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <span class="emoji">🔍</span>
+            <h3>没有找到匹配的课程</h3>
+            <p>试试调整筛选条件吧～</p>
+        </div>
+
+    </div>
+
+    <script src="js/courses-data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

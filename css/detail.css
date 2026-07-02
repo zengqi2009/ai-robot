@@ -1,0 +1,298 @@
+/* ===== 详情页样式 ===== */
+.detail-header {
+    background: linear-gradient(135deg, #1a2a6c, #2d4a8e);
+    border-radius: 24px 24px 16px 16px;
+    padding: 18px 28px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.detail-header .back-link {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.2s;
+}
+.detail-header .back-link:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.detail-header .detail-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.08);
+    padding: 4px 16px;
+    border-radius: 30px;
+}
+
+/* 主信息区 */
+.detail-main {
+    background: var(--paper);
+    border-radius: 20px;
+    padding: 28px 32px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--rule);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.detail-main .top-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.detail-main .top-tags .course-id {
+    font-family: var(--font-el);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 2px 14px;
+    border-radius: 30px;
+    background: var(--robot-blue-bg);
+    color: var(--robot-blue);
+}
+
+.detail-main .top-tags .age-tag {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 30px;
+}
+.detail-main .top-tags .age-tag.age-5-8 { background: #fdebd0; color: #a04000; }
+.detail-main .top-tags .age-tag.age-9-12 { background: #d5f5e3; color: #1a6e3a; }
+.detail-main .top-tags .age-tag.age-13 { background: #d6eaf8; color: #1a5276; }
+
+.detail-main .top-tags .career-tag {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 30px;
+}
+
+.detail-icon {
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.detail-title {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.detail-meta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--ink3);
+    font-weight: 500;
+    margin-bottom: 14px;
+}
+
+.detail-desc {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink2);
+    margin-bottom: 14px;
+}
+
+.detail-knowledge {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+.detail-knowledge .knowledge-tag {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 14px;
+    border-radius: 20px;
+    background: var(--paper2);
+    color: var(--ink2);
+    border: 1px solid var(--rule);
+}
+
+.detail-relation {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink2);
+    background: var(--paper2);
+    padding: 14px 18px;
+    border-radius: 14px;
+    border-left: 4px solid var(--robot-blue);
+    margin-bottom: 4px;
+}
+.detail-relation strong {
+    color: var(--ink);
+}
+
+/* 小课列表 */
+.detail-lessons-title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.detail-lessons-title .badge {
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--robot-blue-bg);
+    color: var(--robot-blue);
+    padding: 2px 16px;
+    border-radius: 30px;
+    border: 1px solid var(--robot-blue-bd);
+}
+
+.detail-lesson-item {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border: 1px solid var(--rule);
+    transition: all 0.2s;
+    box-shadow: var(--shadow);
+}
+.detail-lesson-item:hover {
+    border-color: var(--robot-blue-bd);
+    box-shadow: var(--shadow2);
+}
+
+.detail-lesson-item .lesson-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.detail-lesson-item .lesson-num {
+    font-family: var(--font-el);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--robot-blue);
+    background: var(--robot-blue-bg);
+    padding: 0 14px;
+    border-radius: 30px;
+    min-width: 56px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.detail-lesson-item .lesson-topic {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.detail-lesson-item .lesson-courseware-btn {
+    margin-left: auto;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: var(--robot-blue-bg);
+    color: var(--robot-blue);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--robot-blue-bd);
+    transition: all 0.2s;
+}
+.detail-lesson-item .lesson-courseware-btn:hover {
+    background: var(--robot-blue);
+    color: #fff;
+}
+
+.detail-lesson-item .lesson-detail {
+    font-size: 14px;
+    color: var(--ink2);
+    line-height: 1.7;
+    padding-left: 4px;
+}
+
+.detail-lesson-item .lesson-detail .label {
+    font-weight: 600;
+    color: var(--ink);
+    display: inline-block;
+    min-width: 56px;
+}
+
+.detail-lesson-item .lesson-detail .label-outcome {
+    font-weight: 600;
+    color: var(--robot-orange);
+    display: inline-block;
+    min-width: 56px;
+}
+
+/* 错误/加载状态 */
+.detail-error, .detail-loading {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--paper);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--rule);
+}
+.detail-error .emoji, .detail-loading .emoji {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+}
+.detail-error h3, .detail-loading h3 {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+.detail-error p {
+    color: var(--ink3);
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+.retry-link {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 30px;
+    background: var(--robot-blue);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .detail-main {
+        padding: 20px 18px 18px;
+    }
+    .detail-title {
+        font-size: 22px;
+    }
+    .detail-desc {
+        font-size: 14px;
+    }
+    .detail-lesson-item {
+        padding: 12px 14px;
+    }
+    .detail-lesson-item .lesson-topic {
+        font-size: 15px;
+    }
+}

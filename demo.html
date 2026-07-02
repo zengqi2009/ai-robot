@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>招生展示课 - AI机器人·成长营</title>
+    <link href="https://fonts.googleapis.cn/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Noto+Serif+SC:wght@500;700;900&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .demo-header {
+            background: linear-gradient(135deg, #1a2a6c, #2d4a8e);
+            border-radius: 24px 24px 16px 16px;
+            padding: 18px 28px;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .demo-header h1 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .demo-header .back-link {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.2s;
+        }
+        .demo-header .back-link:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        .demo-card {
+            background: var(--paper);
+            border-radius: 20px;
+            padding: 28px 32px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--rule);
+            margin-bottom: 20px;
+        }
+        .demo-card .demo-icon {
+            font-size: 48px;
+            margin-bottom: 6px;
+        }
+        .demo-card .demo-title {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .demo-card .demo-meta {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--ink3);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        .demo-card .demo-meta span {
+            background: var(--paper2);
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+        .demo-card .demo-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--ink2);
+            margin-bottom: 16px;
+            padding: 14px 18px;
+            background: var(--paper2);
+            border-radius: 14px;
+            border-left: 4px solid var(--robot-orange);
+        }
+
+        .flow-list {
+            list-style: none;
+            padding: 0;
+        }
+        .flow-item {
+            display: flex;
+            gap: 14px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--rule);
+            transition: all 0.2s;
+            align-items: flex-start;
+        }
+        .flow-item:hover {
+            border-color: var(--robot-blue-bd);
+            box-shadow: var(--shadow);
+        }
+        .flow-item .step-num {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--robot-blue);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .flow-item .step-time {
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--robot-orange);
+            background: rgba(230, 126, 34, 0.1);
+            padding: 2px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            margin-top: 6px;
+        }
+        .flow-item .step-content {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--ink2);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .demo-card {
+                padding: 20px 18px 18px;
+            }
+            .demo-card .demo-title {
+                font-size: 20px;
+            }
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            .flow-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="demo-header">
+            <h1>🎯 招生展示课</h1>
+            <div>
+                <a href="curriculum.html" class="back-link">📋 课程体系</a>
+                <a href="index.html" class="back-link" style="margin-left:8px;">← 返回首页</a>
+            </div>
+        </div>
+
+        <p style="text-align:center;color:var(--ink3);font-size:14px;margin-bottom:20px;">
+            三个年龄阶段的招生展示课，用于地推、校园合作与线上引流的核心转化工具
+        </p>
+
+        <div class="demo-grid" id="demoGrid">
+            <!-- 由JS渲染 -->
+        </div>
+    </div>
+
+    <script src="js/courses-data.js"></script>
+    <script>
+        (function() {
+            const grid = document.getElementById('demoGrid');
+            if (!grid) return;
+
+            demoLessonsData.forEach((demo, idx) => {
+                const ageLabel = getAgeLabel(demo.ageGroup);
+                const ageCls = getAgeClass(demo.ageGroup);
+                let flowHtml = '';
+                demo.flow.forEach(f => {
+                    flowHtml += `
+                        <li class="flow-item">
+                            <span class="step-num">${f.step}</span>
+                            <span class="step-time">${f.time}</span>
+                            <span class="step-content">${f.content}</span>
+                        </li>
+                    `;
+                });
+
+                const card = document.createElement('div');
+                card.className = 'demo-card';
+                card.style.animationDelay = (idx * 0.1).toFixed(2) + 's';
+                card.innerHTML = `
+                    <div class="demo-icon">${demo.icon}</div>
+                    <div class="demo-title">${demo.title}</div>
+                    <div class="demo-meta">
+                        <span class="age-tag ${ageCls}">${ageLabel}</span>
+                        <span>🎯 ${demo.target}</span>
+                        <span>⏱ ${demo.duration}</span>
+                    </div>
+                    <div class="demo-desc">${demo.desc}</div>
+                    <h3 style="font-family:var(--font-serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:12px;">
+                        📋 流程设计
+                    </h3>
+                    <ul class="flow-list">${flowHtml}</ul>
+                `;
+                grid.appendChild(card);
+            });
+        })();
+    </script>
+</body>
+</html>

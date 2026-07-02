@@ -28,6 +28,9 @@
                 <a href="demo.html" class="stats-badge" style="text-decoration:none;cursor:pointer;background:#E67E22;color:#fff;">
                     🎯 招生展示课
                 </a>
+                <span id="authArea">
+                    <button class="stats-badge" id="loginBtn" style="background:#4A90D9;color:#fff;cursor:pointer;border:none;">🔑 登录</button>
+                </span>
             </div>
         </header>
 
@@ -132,7 +135,59 @@
 
     </div>
 
+    <!-- 登录/注册弹窗 -->
+    <div id="authModal" class="auth-overlay" style="display:none;">
+        <div class="auth-card">
+            <div class="auth-card-header">
+                <div class="auth-card-icon">🤖</div>
+                <h2>AI 机器人成长营</h2>
+                <p>登录后即可学习全部 48 节互动课件</p>
+            </div>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">登 录</button>
+                <button class="auth-tab" data-tab="register">注 册</button>
+                <div class="auth-tab-indicator"></div>
+            </div>
+            <div class="auth-card-body">
+                <!-- 登录表单 -->
+                <form id="loginForm" class="auth-form active">
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">👤</span>
+                        <input type="text" id="loginUsername" placeholder="用户名" autocomplete="username">
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">🔒</span>
+                        <input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password">
+                    </div>
+                    <div class="auth-msg" id="loginMsg"></div>
+                    <button type="submit" class="auth-submit-btn">登 录</button>
+                </form>
+                <!-- 注册表单 -->
+                <form id="registerForm" class="auth-form">
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">👤</span>
+                        <input type="text" id="regUsername" placeholder="用户名" autocomplete="username">
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">😊</span>
+                        <input type="text" id="regDisplayName" placeholder="昵称（选填）">
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">🔒</span>
+                        <input type="password" id="regPassword" placeholder="密码（至少4位）" autocomplete="new-password">
+                    </div>
+                    <div class="auth-msg" id="regMsg"></div>
+                    <button type="submit" class="auth-submit-btn">注 册</button>
+                </form>
+            </div>
+            <button class="auth-close-btn" id="closeAuthModal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+    </div>
+
     <script src="js/courses-data.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js?v=2"></script>
 </body>
 </html>

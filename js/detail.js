@@ -32,13 +32,18 @@
         const careerLabel = getCareerLabel(course.career);
         const careerCls = getCareerClass(course.career);
         const knowledgeHtml = course.knowledge.map(k => '<span class="knowledge-tag">' + k + '</span>').join('');
+        const isLoggedIn = typeof AuthManager !== 'undefined' && AuthManager.isLoggedIn();
         let lessonsHtml = '';
         course.lessons.forEach(lesson => {
+            const enterBtn = isLoggedIn 
+                ? `<a href="lesson.html?course=${course.id}&lesson=${lesson.num}" class="lesson-enter-btn">🚀 进入学习</a>`
+                : `<button class="lesson-enter-btn lesson-locked" onclick="showLoginPrompt()">🔒 登录后学习</button>`;
             lessonsHtml += `
                 <div class="detail-lesson-item">
                     <div class="lesson-header">
                         <span class="lesson-num">第${lesson.num}课</span>
                         <span class="lesson-topic">${lesson.topic}</span>
+                        ${enterBtn}
                     </div>
                     <div class="lesson-detail">
                         <div><span class="label">🎯 目标</span> ${lesson.goal}</div>
@@ -97,4 +102,125 @@
     document.title = course.title + ' - AI机器人·成长营';
     // 渲染
     renderCourse(course);
+
+    // 登录提示弹窗
+    window.showLoginPrompt = function() {
+        let overlay = document.getElementById('loginOverlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'loginOverlay';
+            overlay.className = 'auth-overlay';
+            overlay.innerHTML = `
+                <div class="auth-card">
+                    <div class="auth-card-header">
+                        <div class="auth-card-icon">🤖</div>
+                        <h2>AI 机器人成长营</h2>
+                        <p>登录后即可学习全部 48 节互动课件</p>
+                    </div>
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-tab="login">登 录</button>
+                        <button class="auth-tab" data-tab="register">注 册</button>
+                        <div class="auth-tab-indicator"></div>
+                    </div>
+                    <div class="auth-card-body">
+                        <form id="loginForm" class="auth-form active">
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">👤</span>
+                                <input type="text" id="loginUser" placeholder="用户名">
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">🔒</span>
+                                <input type="password" id="loginPass" placeholder="密码">
+                            </div>
+                            <div class="auth-msg" id="authMsg"></div>
+                            <button type="button" class="auth-submit-btn" id="loginSubmitBtn">登 录</button>
+                        </form>
+                        <form id="registerForm" class="auth-form">
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">👤</span>
+                                <input type="text" id="regUser" placeholder="用户名">
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">😊</span>
+                                <input type="text" id="regName" placeholder="昵称（选填）">
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">🔒</span>
+                                <input type="password" id="regPass" placeholder="密码（至少4位）">
+                            </div>
+                            <div class="auth-msg" id="regMsg"></div>
+                            <button type="button" class="auth-submit-btn" id="regSubmitBtn">注 册</button>
+                        </form>
+                    </div>
+                    <button class="auth-close-btn" id="authCloseBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            // Tab切换
+            const tabs = overlay.querySelectorAll('.auth-tab');
+            const forms = overlay.querySelectorAll('.auth-form');
+            const indicator = overlay.querySelector('.auth-tab-indicator');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    forms.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                    if (this.dataset.tab === 'login') {
+                        overlay.querySelector('#loginForm').classList.add('active');
+                        indicator.classList.remove('right');
+                    } else {
+                        overlay.querySelector('#registerForm').classList.add('active');
+                        indicator.classList.add('right');
+                    }
+                });
+            });
+
+            overlay.querySelector('#authCloseBtn').addEventListener('click', function() {
+                overlay.style.display = 'none';
+            });
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) overlay.style.display = 'none';
+            });
+
+            // 登录
+            overlay.querySelector('#loginSubmitBtn').addEventListener('click', function() {
+                const u = overlay.querySelector('#loginUser').value.trim();
+                const p = overlay.querySelector('#loginPass').value;
+                const msg = overlay.querySelector('#authMsg');
+                if (!u || !p) { msg.textContent = '请填写用户名和密码'; msg.className = 'auth-msg'; return; }
+                const result = AuthManager.login(u, p);
+                if (result.success) {
+                    msg.textContent = '✅ 登录成功！';
+                    msg.className = 'auth-msg success';
+                    setTimeout(function() { location.reload(); }, 800);
+                } else {
+                    msg.textContent = '❌ ' + result.message;
+                    msg.className = 'auth-msg';
+                }
+            });
+
+            // 注册
+            overlay.querySelector('#regSubmitBtn').addEventListener('click', function() {
+                const u = overlay.querySelector('#regUser').value.trim();
+                const n = overlay.querySelector('#regName').value.trim();
+                const p = overlay.querySelector('#regPass').value;
+                const msg = overlay.querySelector('#regMsg');
+                if (!u || !p) { msg.textContent = '请填写用户名和密码'; msg.className = 'auth-msg'; return; }
+                if (p.length < 4) { msg.textContent = '密码至少4位'; msg.className = 'auth-msg'; return; }
+                const result = AuthManager.register(u, p, n || u);
+                if (result.success) {
+                    msg.textContent = '✅ 注册成功！';
+                    msg.className = 'auth-msg success';
+                    setTimeout(function() { location.reload(); }, 800);
+                } else {
+                    msg.textContent = '❌ ' + result.message;
+                    msg.className = 'auth-msg';
+                }
+            });
+        }
+        overlay.style.display = 'flex';
+    };
 })();

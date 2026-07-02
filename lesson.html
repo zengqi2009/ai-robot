@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI机器人成长营 - 互动课件</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/detail.css">
+    <style>
+        .lesson-header {
+            background: linear-gradient(135deg, #4A90D9 0%, #67B8DE 100%);
+            color: #fff;
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .lesson-header h1 {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+        .lesson-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .lesson-back {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .lesson-back:hover { opacity: 1; }
+        .lesson-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .lesson-info {
+            background: var(--paper);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .lesson-info h2 {
+            font-size: 1.1rem;
+            color: var(--robot-blue);
+            margin-bottom: 8px;
+        }
+        .lesson-info p {
+            font-size: 0.9rem;
+            color: #5a4a3a;
+            line-height: 1.6;
+        }
+        .sim-area {
+            background: var(--paper);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .no-sim {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7a6a5a;
+        }
+        .no-sim .icon { font-size: 48px; margin-bottom: 12px; }
+        .no-sim p { font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="lesson-header">
+        <a href="javascript:history.back()" class="lesson-back">← 返回</a>
+        <h1 id="lessonTitle">互动课件</h1>
+        <p id="lessonSubtitle">AI机器人成长营</p>
+    </div>
+
+    <div class="lesson-container">
+        <div class="lesson-info" id="lessonInfo">
+            <h2 id="lessonTopic">加载中...</h2>
+            <p id="lessonGoal"></p>
+        </div>
+        <div class="sim-area" id="simArea">
+            <div class="no-sim" id="loadingMsg">
+                <div class="icon">⏳</div>
+                <p>正在加载互动课件...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/courses-data.js"></script>
+    <script src="js/simulations.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        (function() {
+            // 权限检查
+            if (!AuthManager.isLoggedIn()) {
+                alert('请先登录后再访问课件');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // 获取参数
+            const params = new URLSearchParams(window.location.search);
+            const courseId = parseInt(params.get('course'));
+            const lessonNum = parseInt(params.get('lesson'));
+
+            if (!courseId || !lessonNum || courseId < 1 || courseId > 12 || lessonNum < 1 || lessonNum > 4) {
+                document.getElementById('loadingMsg').innerHTML = '<div class="icon">❌</div><p>参数错误，请从课程页面进入</p>';
+                return;
+            }
+
+            // 获取课程信息
+            const course = getCoursesData().find(c => c.id === courseId);
+            if (!course) {
+                document.getElementById('loadingMsg').innerHTML = '<div class="icon">❌</div><p>未找到该课程</p>';
+                return;
+            }
+
+            const lesson = course.lessons.find(l => l.num === lessonNum);
+            if (!lesson) {
+                document.getElementById('loadingMsg').innerHTML = '<div class="icon">❌</div><p>未找到该课时</p>';
+                return;
+            }
+
+            // 更新页面信息
+            document.title = `${lesson.topic} - AI机器人成长营`;
+            document.getElementById('lessonTitle').textContent = lesson.topic;
+            document.getElementById('lessonSubtitle').textContent = `${course.code} ${course.title}`;
+            document.getElementById('lessonTopic').textContent = `第${lessonNum}课：${lesson.topic}`;
+            document.getElementById('lessonGoal').innerHTML = `<strong>教学目标：</strong>${lesson.goal}<br><strong>学习成果：</strong>${lesson.outcome}`;
+
+            // 加载模拟器
+            const sim = Simulations.get(courseId, lessonNum);
+            const simArea = document.getElementById('simArea');
+
+            if (sim) {
+                simArea.innerHTML = sim.html;
+                if (sim.init) {
+                    sim.init(simArea);
+                }
+            } else {
+                simArea.innerHTML = '<div class="no-sim"><div class="icon">🔧</div><p>该课件正在开发中，敬请期待！</p></div>';
+            }
+        })();
+    </script>
+</body>
+</html>

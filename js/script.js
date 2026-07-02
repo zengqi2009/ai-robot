@@ -197,10 +197,141 @@ clearFiltersBtn.addEventListener('click', () => {
     render();
 });
 // ============================================================
+//  登录/注册 UI
+// ============================================================
+function updateAuthUI() {
+    const authArea = document.getElementById('authArea');
+    if (!authArea) return;
+    if (AuthManager.isLoggedIn()) {
+        const user = AuthManager.getCurrentUser();
+        authArea.innerHTML = `
+            <span class="stats-badge" style="background:#27ae60;color:#fff;">
+                👤 ${user.displayName || user.username}
+            </span>
+            <button class="stats-badge" id="logoutBtn" style="background:#e74c3c;color:#fff;cursor:pointer;border:none;">🚪 退出</button>
+        `;
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            AuthManager.logout();
+            updateAuthUI();
+        });
+    } else {
+        authArea.innerHTML = `
+            <button class="stats-badge" id="loginBtn" style="background:#4A90D9;color:#fff;cursor:pointer;border:none;">🔑 登录</button>
+        `;
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            document.getElementById('authModal').style.display = 'flex';
+        });
+    }
+}
+
+// 弹窗控制
+const authModal = document.getElementById('authModal');
+const authTabs = document.querySelectorAll('.auth-tab');
+const authForms = document.querySelectorAll('.auth-form');
+const authIndicator = document.querySelector('.auth-tab-indicator');
+
+function switchAuthTab(tab) {
+    authTabs.forEach(t => t.classList.remove('active'));
+    authForms.forEach(f => f.classList.remove('active'));
+    
+    if (tab === 'login') {
+        authTabs[0].classList.add('active');
+        document.getElementById('loginForm').classList.add('active');
+        if (authIndicator) authIndicator.classList.remove('right');
+    } else {
+        authTabs[1].classList.add('active');
+        document.getElementById('registerForm').classList.add('active');
+        if (authIndicator) authIndicator.classList.add('right');
+    }
+}
+
+authTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+        switchAuthTab(this.dataset.tab);
+    });
+});
+
+const closeAuthBtn = document.getElementById('closeAuthModal');
+if (closeAuthBtn) {
+    closeAuthBtn.addEventListener('click', function() {
+        authModal.style.display = 'none';
+    });
+}
+
+if (authModal) {
+    authModal.addEventListener('click', function(e) {
+        if (e.target === authModal) {
+            authModal.style.display = 'none';
+        }
+    });
+}
+
+// 登录表单
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const msg = document.getElementById('loginMsg');
+    
+    if (!username || !password) {
+        msg.textContent = '请填写用户名和密码';
+        msg.className = 'auth-msg';
+        return;
+    }
+    
+    const result = AuthManager.login(username, password);
+    if (result.success) {
+        msg.textContent = '✅ 登录成功！';
+        msg.className = 'auth-msg success';
+        setTimeout(() => {
+            authModal.style.display = 'none';
+            updateAuthUI();
+        }, 800);
+    } else {
+        msg.textContent = '❌ ' + result.message;
+        msg.className = 'auth-msg';
+    }
+});
+
+// 注册表单
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('regUsername').value.trim();
+    const displayName = document.getElementById('regDisplayName').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const msg = document.getElementById('regMsg');
+    
+    if (!username || !password) {
+        msg.textContent = '请填写用户名和密码';
+        msg.className = 'auth-msg';
+        return;
+    }
+    if (password.length < 4) {
+        msg.textContent = '密码至少4位';
+        msg.className = 'auth-msg';
+        return;
+    }
+    
+    const result = AuthManager.register(username, password, displayName || username);
+    if (result.success) {
+        msg.textContent = '✅ 注册成功！';
+        msg.className = 'auth-msg success';
+        setTimeout(() => {
+            authModal.style.display = 'none';
+            updateAuthUI();
+        }, 800);
+    } else {
+        msg.textContent = '❌ ' + result.message;
+        msg.className = 'auth-msg';
+    }
+});
+
+// ============================================================
 //  初始化
 // ============================================================
 renderKnowledgeButtons();
 render();
 toggleFilter(false);
+updateAuthUI();
 console.log('\u{1F916} AI\u673A\u5668\u4EBA\u6210\u957F\u8425 \u5DF2\u542F\u52A8\uFF01 \u5171 ' + coursesData.length + ' \u95E8\u8BFE\u7A0B\uFF0C\u6BCF\u95E84\u5C0F\u8BFE');
 console.log('\u{1F4CB} \u7F16\u53F7: R01-R04 (5-8\u5C81), R05-R08 (9-12\u5C81), R09-R12 (13\u5C81+)');

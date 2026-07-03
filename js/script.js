@@ -204,9 +204,14 @@ function updateAuthUI() {
     if (!authArea) return;
     if (AuthManager.isLoggedIn()) {
         const user = AuthManager.getCurrentUser();
+        const isAdmin = AuthManager.isAdmin();
+        const adminLink = isAdmin
+            ? `<a href="admin.html" class="stats-badge" style="text-decoration:none;background:#1a2a6c;color:#fff;">⚙️ 管理</a>`
+            : '';
         authArea.innerHTML = `
+            ${adminLink}
             <span class="stats-badge" style="background:#27ae60;color:#fff;">
-                👤 ${user.displayName || user.username}
+                👤 ${user.nickname || user.username}
             </span>
             <button class="stats-badge" id="logoutBtn" style="background:#e74c3c;color:#fff;cursor:pointer;border:none;">🚪 退出</button>
         `;

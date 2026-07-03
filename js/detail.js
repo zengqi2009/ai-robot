@@ -138,15 +138,60 @@
                         <form id="registerForm" class="auth-form">
                             <div class="auth-input-group">
                                 <span class="auth-input-icon">👤</span>
-                                <input type="text" id="regUser" placeholder="用户名">
+                                <input type="text" id="regUser" placeholder="用户名（用于登录）">
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">🔒</span>
+                                <input type="password" id="regPass" placeholder="密码（至少4位）">
                             </div>
                             <div class="auth-input-group">
                                 <span class="auth-input-icon">😊</span>
                                 <input type="text" id="regName" placeholder="昵称（选填）">
                             </div>
                             <div class="auth-input-group">
-                                <span class="auth-input-icon">🔒</span>
-                                <input type="password" id="regPass" placeholder="密码（至少4位）">
+                                <span class="auth-input-icon">📝</span>
+                                <input type="text" id="regRealName" placeholder="真实姓名 *">
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">⚧</span>
+                                <select id="regGender" class="auth-select">
+                                    <option value="">请选择性别 *</option>
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">🏫</span>
+                                <input type="text" id="regSchool" placeholder="就读学校 *">
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">🎓</span>
+                                <select id="regGrade" class="auth-select">
+                                    <option value="">请选择在读年级 *</option>
+                                    <option value="K1">K1（幼儿园小班）</option>
+                                    <option value="K2">K2（幼儿园中班）</option>
+                                    <option value="K3">K3（幼儿园大班）</option>
+                                    <option value="G1">G1（一年级）</option>
+                                    <option value="G2">G2（二年级）</option>
+                                    <option value="G3">G3（三年级）</option>
+                                    <option value="G4">G4（四年级）</option>
+                                    <option value="G5">G5（五年级）</option>
+                                    <option value="G6">G6（六年级）</option>
+                                    <option value="G7">G7（初一）</option>
+                                    <option value="G8">G8（初二）</option>
+                                    <option value="G9">G9（初三）</option>
+                                    <option value="G10">G10（高一）</option>
+                                    <option value="G11">G11（高二）</option>
+                                    <option value="G12">G12（高三）</option>
+                                </select>
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">📱</span>
+                                <input type="tel" id="regPhone" placeholder="手机号（选填）">
+                            </div>
+                            <div class="auth-input-group">
+                                <span class="auth-input-icon">📧</span>
+                                <input type="email" id="regEmail" placeholder="电子邮箱（选填）">
                             </div>
                             <div class="auth-msg" id="regMsg"></div>
                             <button type="button" class="auth-submit-btn" id="regSubmitBtn">注 册</button>
@@ -191,15 +236,19 @@
                 const p = overlay.querySelector('#loginPass').value;
                 const msg = overlay.querySelector('#authMsg');
                 if (!u || !p) { msg.textContent = '请填写用户名和密码'; msg.className = 'auth-msg'; return; }
-                const result = AuthManager.login(u, p);
-                if (result.success) {
-                    msg.textContent = '✅ 登录成功！';
-                    msg.className = 'auth-msg success';
-                    setTimeout(function() { location.reload(); }, 800);
-                } else {
-                    msg.textContent = '❌ ' + result.message;
+                AuthManager.login(u, p).then(function(result) {
+                    if (result.success) {
+                        msg.textContent = '✅ 登录成功！';
+                        msg.className = 'auth-msg success';
+                        setTimeout(function() { location.reload(); }, 800);
+                    } else {
+                        msg.textContent = '❌ ' + result.message;
+                        msg.className = 'auth-msg';
+                    }
+                }).catch(function() {
+                    msg.textContent = '❌ 网络错误，请重试';
                     msg.className = 'auth-msg';
-                }
+                });
             });
 
             // 注册
@@ -207,18 +256,42 @@
                 const u = overlay.querySelector('#regUser').value.trim();
                 const n = overlay.querySelector('#regName').value.trim();
                 const p = overlay.querySelector('#regPass').value;
+                const realName = overlay.querySelector('#regRealName').value.trim();
+                const gender = overlay.querySelector('#regGender').value;
+                const school = overlay.querySelector('#regSchool').value.trim();
+                const grade = overlay.querySelector('#regGrade').value;
+                const phone = overlay.querySelector('#regPhone').value.trim();
+                const email = overlay.querySelector('#regEmail').value.trim();
                 const msg = overlay.querySelector('#regMsg');
                 if (!u || !p) { msg.textContent = '请填写用户名和密码'; msg.className = 'auth-msg'; return; }
                 if (p.length < 4) { msg.textContent = '密码至少4位'; msg.className = 'auth-msg'; return; }
-                const result = AuthManager.register(u, p, n || u);
-                if (result.success) {
-                    msg.textContent = '✅ 注册成功！';
-                    msg.className = 'auth-msg success';
-                    setTimeout(function() { location.reload(); }, 800);
-                } else {
-                    msg.textContent = '❌ ' + result.message;
+                if (!realName) { msg.textContent = '请填写真实姓名'; msg.className = 'auth-msg'; return; }
+                if (!gender) { msg.textContent = '请选择性别'; msg.className = 'auth-msg'; return; }
+                if (!school) { msg.textContent = '请填写就读学校'; msg.className = 'auth-msg'; return; }
+                if (!grade) { msg.textContent = '请选择在读年级'; msg.className = 'auth-msg'; return; }
+                AuthManager.register({
+                    username: u,
+                    password: p,
+                    nickname: n || u,
+                    realName: realName,
+                    gender: gender,
+                    school: school,
+                    grade: grade,
+                    phone: phone,
+                    email: email
+                }).then(function(result) {
+                    if (result.success) {
+                        msg.textContent = '✅ 注册成功！';
+                        msg.className = 'auth-msg success';
+                        setTimeout(function() { location.reload(); }, 800);
+                    } else {
+                        msg.textContent = '❌ ' + result.message;
+                        msg.className = 'auth-msg';
+                    }
+                }).catch(function() {
+                    msg.textContent = '❌ 网络错误，请重试';
                     msg.className = 'auth-msg';
-                }
+                });
             });
         }
         overlay.style.display = 'flex';

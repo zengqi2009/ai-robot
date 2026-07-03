@@ -63,7 +63,7 @@
         }
         .user-table-header {
             display: grid;
-            grid-template-columns: 1fr 1fr 100px 120px 160px;
+            grid-template-columns: 1.2fr 1fr 1fr 0.8fr 100px 120px 160px;
             padding: 12px 16px;
             background: #f0ede4;
             font-weight: 600;
@@ -72,7 +72,7 @@
         }
         .user-row {
             display: grid;
-            grid-template-columns: 1fr 1fr 100px 120px 160px;
+            grid-template-columns: 1.2fr 1fr 1fr 0.8fr 100px 120px 160px;
             padding: 12px 16px;
             border-bottom: 1px solid #f0ede4;
             align-items: center;
@@ -190,7 +190,7 @@
         <!-- 动态渲染 -->
     </div>
 
-    <script src="js/auth.js"></script>
+    <script src="js/auth.js?v=4"></script>
     <script>
     (function() {
         const container = document.getElementById('adminContent');
@@ -209,116 +209,135 @@
                 const u = document.getElementById('adminUser').value.trim();
                 const p = document.getElementById('adminPass').value;
                 const msg = document.getElementById('adminMsg');
-                const result = AuthManager.login(u, p);
-                if (result.success) {
-                    if (AuthManager.isAdmin()) {
-                        renderDashboard();
+                AuthManager.login(u, p).then(function(result) {
+                    if (result.success) {
+                        if (AuthManager.isAdmin()) {
+                            renderDashboard();
+                        } else {
+                            msg.textContent = '❌ 该账号不是管理员';
+                            AuthManager.logout();
+                        }
                     } else {
-                        msg.textContent = '❌ 该账号不是管理员';
-                        AuthManager.logout();
+                        msg.textContent = '❌ ' + result.message;
                     }
-                } else {
-                    msg.textContent = '❌ ' + result.message;
-                }
+                }).catch(function() {
+                    msg.textContent = '❌ 网络错误，请重试';
+                });
             });
         }
 
         function renderDashboard() {
-            const result = AuthManager.getAllUsers();
-            if (!result.success) {
-                renderLogin();
-                return;
-            }
-            const users = result.users;
-            const total = users.length;
-            const active = users.filter(u => u.active).length;
-            const pending = total - active;
-
-            let userRows = '';
-            users.forEach(u => {
-                const isAdm = u.role === 'admin';
-                const statusClass = isAdm ? 'admin' : (u.active ? 'active' : 'pending');
-                const statusText = isAdm ? '管理员' : (u.active ? '已激活' : '待激活');
-                const created = u.createdAt ? new Date(u.createdAt).toLocaleDateString('zh-CN') : '-';
-                const lastLogin = u.lastLogin ? new Date(u.lastLogin).toLocaleString('zh-CN') : '从未登录';
-
-                let actions = '';
-                if (!isAdm) {
-                    if (u.active) {
-                        actions = `<button class="action-btn deactivate" onclick="deactivateUser('${u.username}')">停用</button>`;
-                    } else {
-                        actions = `<button class="action-btn activate" onclick="activateUser('${u.username}')">激活</button>`;
-                    }
-                    actions += `<button class="action-btn delete" onclick="deleteUser('${u.username}')">删除</button>`;
+            AuthManager.getAllUsers().then(function(result) {
+                if (!result.success) {
+                    renderLogin();
+                    return;
                 }
+                const users = result.users;
+                const total = users.length;
+                const active = users.filter(u => u.active).length;
+                const pending = total - active;
 
-                userRows += `
-                    <div class="user-row">
-                        <div><strong>${u.nickname}</strong><br/><small style="color:#999;">@${u.username}</small></div>
-                        <div><small>${lastLogin}</small></div>
-                        <div><span class="status-badge ${statusClass}">${statusText}</span></div>
-                        <div><small>${created}</small></div>
-                        <div>${actions}</div>
+                let userRows = '';
+                users.forEach(u => {
+                    const isAdm = u.role === 'admin';
+                    const statusClass = isAdm ? 'admin' : (u.active ? 'active' : 'pending');
+                    const statusText = isAdm ? '管理员' : (u.active ? '已激活' : '待激活');
+                    const created = u.createdAt ? new Date(u.createdAt).toLocaleDateString('zh-CN') : '-';
+                    const lastLogin = u.lastLogin ? new Date(u.lastLogin).toLocaleString('zh-CN') : '从未登录';
+                    const realName = u.realName || '-';
+                    const gender = u.gender || '-';
+                    const school = u.school || '-';
+                    const grade = u.grade || '-';
+                    const phone = u.phone || '-';
+                    const email = u.email || '-';
+
+                    let actions = '';
+                    if (!isAdm) {
+                        if (u.active) {
+                            actions = `<button class="action-btn deactivate" onclick="deactivateUser('${u.username}')">停用</button>`;
+                        } else {
+                            actions = `<button class="action-btn activate" onclick="activateUser('${u.username}')">激活</button>`;
+                        }
+                        actions += `<button class="action-btn delete" onclick="deleteUser('${u.username}')">删除</button>`;
+                    }
+
+                    userRows += `
+                        <div class="user-row">
+                            <div><strong>${u.nickname}</strong><br/><small style="color:#999;">@${u.username}</small></div>
+                            <div><small>${realName}</small><br/><small style="color:#999;">${gender}</small></div>
+                            <div><small>${school}</small><br/><small style="color:#999;">${grade}</small></div>
+                            <div><small>${phone}</small><br/><small style="color:#999;">${email}</small></div>
+                            <div><small>${lastLogin}</small></div>
+                            <div><span class="status-badge ${statusClass}">${statusText}</span></div>
+                            <div>${actions}</div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = `
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <div class="num">${total}</div>
+                            <div class="label">总用户数</div>
+                        </div>
+                        <div class="stat-card active">
+                            <div class="num">${active}</div>
+                            <div class="label">已激活</div>
+                        </div>
+                        <div class="stat-card pending">
+                            <div class="num">${pending}</div>
+                            <div class="label">待激活</div>
+                        </div>
+                    </div>
+                    <div class="user-table">
+                        <div class="user-table-header">
+                            <div>用户</div>
+                            <div>姓名/性别</div>
+                            <div>学校/年级</div>
+                            <div>联系方式</div>
+                            <div>最近登录</div>
+                            <div>状态</div>
+                            <div>操作</div>
+                        </div>
+                        ${userRows || '<div class="no-users">暂无注册用户</div>'}
                     </div>
                 `;
+            }).catch(function() {
+                container.innerHTML = '<div class="no-users">❌ 网络错误，请刷新重试</div>';
             });
-
-            container.innerHTML = `
-                <div class="admin-stats">
-                    <div class="stat-card">
-                        <div class="num">${total}</div>
-                        <div class="label">总用户数</div>
-                    </div>
-                    <div class="stat-card active">
-                        <div class="num">${active}</div>
-                        <div class="label">已激活</div>
-                    </div>
-                    <div class="stat-card pending">
-                        <div class="num">${pending}</div>
-                        <div class="label">待激活</div>
-                    </div>
-                </div>
-                <div class="user-table">
-                    <div class="user-table-header">
-                        <div>用户</div>
-                        <div>最近登录</div>
-                        <div>状态</div>
-                        <div>注册时间</div>
-                        <div>操作</div>
-                    </div>
-                    ${userRows || '<div class="no-users">暂无注册用户</div>'}
-                </div>
-            `;
         }
 
         // 全局函数
         window.activateUser = function(username) {
-            const result = AuthManager.activateUser(username);
-            if (result.success) {
-                renderDashboard();
-            } else {
-                alert(result.message);
-            }
+            AuthManager.activateUser(username).then(function(result) {
+                if (result.success) {
+                    renderDashboard();
+                } else {
+                    alert(result.message);
+                }
+            });
         };
 
         window.deactivateUser = function(username) {
             if (!confirm('确定要停用该用户吗？')) return;
-            const result = AuthManager.deactivateUser(username);
-            if (result.success) {
-                renderDashboard();
-            } else {
-                alert(result.message);
-            }
+            AuthManager.deactivateUser(username).then(function(result) {
+                if (result.success) {
+                    renderDashboard();
+                } else {
+                    alert(result.message);
+                }
+            });
         };
 
         window.deleteUser = function(username) {
             if (!confirm('确定要删除该用户吗？此操作不可恢复！')) return;
-            const result = AuthManager.deleteUser(username);
-            if (result.success) {
-                renderDashboard();
-            } else {
-                alert(result.message);
-            }
+            AuthManager.deleteUser(username).then(function(result) {
+                if (result.success) {
+                    renderDashboard();
+                } else {
+                    alert(result.message);
+                }
+            });
         };
 
         // 入口

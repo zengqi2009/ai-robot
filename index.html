@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>AI机器人·成长营</title>
     <link href="https://fonts.googleapis.cn/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Noto+Serif+SC:wght@500;700;900&amp;display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css?v=3" />
+    <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -166,15 +166,60 @@
                 <form id="registerForm" class="auth-form">
                     <div class="auth-input-group">
                         <span class="auth-input-icon">👤</span>
-                        <input type="text" id="regUsername" placeholder="用户名" autocomplete="username">
+                        <input type="text" id="regUsername" placeholder="用户名（用于登录）" autocomplete="username">
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">🔒</span>
+                        <input type="password" id="regPassword" placeholder="密码（至少4位）" autocomplete="new-password">
                     </div>
                     <div class="auth-input-group">
                         <span class="auth-input-icon">😊</span>
                         <input type="text" id="regDisplayName" placeholder="昵称（选填）">
                     </div>
                     <div class="auth-input-group">
-                        <span class="auth-input-icon">🔒</span>
-                        <input type="password" id="regPassword" placeholder="密码（至少4位）" autocomplete="new-password">
+                        <span class="auth-input-icon">📝</span>
+                        <input type="text" id="regRealName" placeholder="真实姓名 *">
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">⚧</span>
+                        <select id="regGender" class="auth-select">
+                            <option value="">请选择性别 *</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">🏫</span>
+                        <input type="text" id="regSchool" placeholder="就读学校 *">
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">🎓</span>
+                        <select id="regGrade" class="auth-select">
+                            <option value="">请选择在读年级 *</option>
+                            <option value="K1">K1（幼儿园小班）</option>
+                            <option value="K2">K2（幼儿园中班）</option>
+                            <option value="K3">K3（幼儿园大班）</option>
+                            <option value="G1">G1（一年级）</option>
+                            <option value="G2">G2（二年级）</option>
+                            <option value="G3">G3（三年级）</option>
+                            <option value="G4">G4（四年级）</option>
+                            <option value="G5">G5（五年级）</option>
+                            <option value="G6">G6（六年级）</option>
+                            <option value="G7">G7（初一）</option>
+                            <option value="G8">G8（初二）</option>
+                            <option value="G9">G9（初三）</option>
+                            <option value="G10">G10（高一）</option>
+                            <option value="G11">G11（高二）</option>
+                            <option value="G12">G12（高三）</option>
+                        </select>
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">📱</span>
+                        <input type="tel" id="regPhone" placeholder="手机号（选填）">
+                    </div>
+                    <div class="auth-input-group">
+                        <span class="auth-input-icon">📧</span>
+                        <input type="email" id="regEmail" placeholder="电子邮箱（选填）">
                     </div>
                     <div class="auth-msg" id="regMsg"></div>
                     <button type="submit" class="auth-submit-btn">注 册</button>
@@ -187,7 +232,7 @@
     </div>
 
     <script src="js/courses-data.js"></script>
-    <script src="js/auth.js?v=3"></script>
-    <script src="js/script.js?v=3"></script>
+    <script src="js/auth.js?v=5"></script>
+    <script src="js/script.js?v=6"></script>
 </body>
 </html>

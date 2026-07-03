@@ -284,18 +284,22 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         return;
     }
     
-    const result = AuthManager.login(username, password);
-    if (result.success) {
-        msg.textContent = '✅ 登录成功！';
-        msg.className = 'auth-msg success';
-        setTimeout(() => {
-            authModal.style.display = 'none';
-            updateAuthUI();
-        }, 800);
-    } else {
-        msg.textContent = '❌ ' + result.message;
+    AuthManager.login(username, password).then(function(result) {
+        if (result.success) {
+            msg.textContent = '✅ 登录成功！';
+            msg.className = 'auth-msg success';
+            setTimeout(() => {
+                authModal.style.display = 'none';
+                updateAuthUI();
+            }, 800);
+        } else {
+            msg.textContent = '❌ ' + result.message;
+            msg.className = 'auth-msg';
+        }
+    }).catch(function() {
+        msg.textContent = '❌ 网络错误，请重试';
         msg.className = 'auth-msg';
-    }
+    });
 });
 
 // 注册表单
@@ -304,6 +308,12 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
     const username = document.getElementById('regUsername').value.trim();
     const displayName = document.getElementById('regDisplayName').value.trim();
     const password = document.getElementById('regPassword').value;
+    const realName = document.getElementById('regRealName').value.trim();
+    const gender = document.getElementById('regGender').value;
+    const school = document.getElementById('regSchool').value.trim();
+    const grade = document.getElementById('regGrade').value;
+    const phone = document.getElementById('regPhone').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
     const msg = document.getElementById('regMsg');
     
     if (!username || !password) {
@@ -316,19 +326,55 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         msg.className = 'auth-msg';
         return;
     }
-    
-    const result = AuthManager.register(username, password, displayName || username);
-    if (result.success) {
-        msg.textContent = '✅ 注册成功！';
-        msg.className = 'auth-msg success';
-        setTimeout(() => {
-            authModal.style.display = 'none';
-            updateAuthUI();
-        }, 800);
-    } else {
-        msg.textContent = '❌ ' + result.message;
+    if (!realName) {
+        msg.textContent = '请填写真实姓名';
         msg.className = 'auth-msg';
+        return;
     }
+    if (!gender) {
+        msg.textContent = '请选择性别';
+        msg.className = 'auth-msg';
+        return;
+    }
+    if (!school) {
+        msg.textContent = '请填写就读学校';
+        msg.className = 'auth-msg';
+        return;
+    }
+    if (!grade) {
+        msg.textContent = '请选择在读年级';
+        msg.className = 'auth-msg';
+        return;
+    }
+    
+    const regData = {
+        username: username,
+        password: password,
+        nickname: displayName || username,
+        realName: realName,
+        gender: gender,
+        school: school,
+        grade: grade,
+        phone: phone,
+        email: email
+    };
+    
+    AuthManager.register(regData).then(function(result) {
+        if (result.success) {
+            msg.textContent = '✅ 注册成功！';
+            msg.className = 'auth-msg success';
+            setTimeout(() => {
+                authModal.style.display = 'none';
+                updateAuthUI();
+            }, 800);
+        } else {
+            msg.textContent = '❌ ' + result.message;
+            msg.className = 'auth-msg';
+        }
+    }).catch(function() {
+        msg.textContent = '❌ 网络错误，请重试';
+        msg.className = 'auth-msg';
+    });
 });
 
 // ============================================================

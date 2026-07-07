@@ -7,91 +7,276 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/detail.css">
     <style>
-        .lesson-header {
-            background: linear-gradient(135deg, #4A90D9 0%, #67B8DE 100%);
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+            background: var(--paper2, #F0EDE4);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* ===== 顶部导航栏 ===== */
+        .lesson-topbar {
+            background: linear-gradient(135deg, #1a2a6c, #2d4a8e);
             color: #fff;
-            padding: 24px 20px;
-            text-align: center;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
         }
-        .lesson-header h1 {
-            font-size: 1.4rem;
-            margin-bottom: 4px;
+        .lesson-topbar .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .lesson-header p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        .lesson-back {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
+        .lesson-topbar .topbar-back {
             color: #fff;
             text-decoration: none;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.12);
+            transition: all .2s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
-        .lesson-back:hover { opacity: 1; }
-        .lesson-container {
-            max-width: 800px;
+        .lesson-topbar .topbar-back:hover {
+            background: rgba(255,255,255,0.22);
+            transform: translateX(-2px);
+        }
+        .lesson-topbar .topbar-title {
+            font-family: var(--font-serif, 'Noto Serif SC', serif);
+            font-size: 15px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        .lesson-topbar .topbar-course {
+            font-size: 11px;
+            opacity: 0.75;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
+        }
+
+        /* ===== 主内容区 ===== */
+        .lesson-main {
+            max-width: 840px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 16px;
         }
-        .lesson-info {
-            background: var(--paper);
+
+        /* ===== 课程信息卡片 ===== */
+        .lesson-info-card {
+            background: var(--paper, #FDFBF7);
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--paper3, #E8E3D8);
         }
-        .lesson-info h2 {
-            font-size: 1.1rem;
-            color: var(--robot-blue);
+        .lesson-info-card .info-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
             margin-bottom: 8px;
+            background: #e8f0fe;
+            color: #1a5276;
         }
-        .lesson-info p {
-            font-size: 0.9rem;
+        .lesson-info-card h2 {
+            font-size: 1.15rem;
+            color: var(--robot-blue, #4A90D9);
+            margin-bottom: 6px;
+            font-family: var(--font-serif, 'Noto Serif SC', serif);
+        }
+        .lesson-info-card .info-goal {
+            font-size: 0.88rem;
             color: #5a4a3a;
-            line-height: 1.6;
+            line-height: 1.7;
         }
-        .sim-area {
-            background: var(--paper);
+        .lesson-info-card .info-goal strong {
+            color: #1a2a6c;
+        }
+
+        /* ===== 课件模拟区 ===== */
+        .lesson-sim-area {
+            background: var(--paper, #FDFBF7);
             border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--paper3, #E8E3D8);
+            overflow: hidden;
         }
-        .no-sim {
+        .lesson-sim-area .sim-loading {
             text-align: center;
             padding: 60px 20px;
             color: #7a6a5a;
         }
-        .no-sim .icon { font-size: 48px; margin-bottom: 12px; }
-        .no-sim p { font-size: 1rem; }
+        .lesson-sim-area .sim-loading .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            animation: simFloat 1.5s ease-in-out infinite;
+        }
+        @keyframes simFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ===== 底部返回按钮（移动端备用） ===== */
+        .lesson-bottom-back {
+            text-align: center;
+            padding: 20px 16px 32px;
+        }
+        .lesson-bottom-back a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 24px;
+            border-radius: 30px;
+            background: #1a2a6c;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all .2s;
+        }
+        .lesson-bottom-back a:hover {
+            background: #2d4a8e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(26,42,108,.3);
+        }
+
+        /* ===== 响应式布局 ===== */
+        @media (max-width: 768px) {
+            .lesson-topbar {
+                height: 46px;
+                padding: 0 10px;
+            }
+            .lesson-topbar .topbar-title {
+                font-size: 13px;
+                max-width: 140px;
+            }
+            .lesson-topbar .topbar-course {
+                font-size: 10px;
+                max-width: 100px;
+            }
+            .lesson-topbar .topbar-back {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            .lesson-main {
+                padding: 10px;
+            }
+            .lesson-info-card {
+                padding: 12px 14px;
+                border-radius: 12px;
+                margin-bottom: 10px;
+            }
+            .lesson-info-card h2 {
+                font-size: 1rem;
+            }
+            .lesson-info-card .info-goal {
+                font-size: 0.8rem;
+            }
+            .lesson-bottom-back a {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lesson-topbar {
+                height: 42px;
+                padding: 0 8px;
+            }
+            .lesson-topbar .topbar-title {
+                font-size: 12px;
+                max-width: 100px;
+            }
+            .lesson-topbar .topbar-course {
+                display: none;
+            }
+            .lesson-topbar .topbar-back {
+                font-size: 11px;
+                padding: 4px 8px;
+                gap: 2px;
+            }
+            .lesson-topbar .topbar-back .back-text {
+                display: none;
+            }
+            .lesson-main {
+                padding: 6px;
+            }
+            .lesson-info-card {
+                padding: 10px 12px;
+                border-radius: 10px;
+                margin-bottom: 8px;
+            }
+            .lesson-info-card h2 {
+                font-size: 0.9rem;
+            }
+            .lesson-info-card .info-goal {
+                font-size: 0.75rem;
+            }
+            .lesson-bottom-back {
+                padding: 16px 10px 24px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="lesson-header">
-        <a href="javascript:history.back()" class="lesson-back">← 返回</a>
-        <h1 id="lessonTitle">互动课件</h1>
-        <p id="lessonSubtitle">AI机器人成长营</p>
-    </div>
-
-    <div class="lesson-container">
-        <div class="lesson-info" id="lessonInfo">
-            <h2 id="lessonTopic">加载中...</h2>
-            <p id="lessonGoal"></p>
-        </div>
-        <div class="sim-area" id="simArea">
-            <div class="no-sim" id="loadingMsg">
-                <div class="icon">⏳</div>
-                <p>正在加载互动课件...</p>
+    <!-- 顶部导航栏 -->
+    <div class="lesson-topbar">
+        <div class="topbar-left">
+            <a href="index.html" class="topbar-back" id="topbarBackBtn">
+                <span>←</span> <span class="back-text">返回课程</span>
+            </a>
+            <div>
+                <div class="topbar-title" id="topbarTitle">互动课件</div>
+                <div class="topbar-course" id="topbarCourse">AI机器人成长营</div>
             </div>
         </div>
     </div>
 
-    <script src="js/courses-data.js"></script>
-    <script src="js/simulations.js"></script>
-    <script src="js/auth.js"></script>
+    <!-- 主内容区 -->
+    <div class="lesson-main">
+        <!-- 课程信息卡片 -->
+        <div class="lesson-info-card" id="lessonInfoCard">
+            <span class="info-badge" id="infoBadge">加载中...</span>
+            <h2 id="lessonTopic">加载中...</h2>
+            <p class="info-goal" id="lessonGoal"></p>
+        </div>
+
+        <!-- 课件模拟区 -->
+        <div class="lesson-sim-area" id="simArea">
+            <div class="sim-loading" id="loadingMsg">
+                <div class="icon">⏳</div>
+                <p>正在加载互动课件...</p>
+            </div>
+        </div>
+
+        <!-- 底部返回按钮 -->
+        <div class="lesson-bottom-back">
+            <a href="index.html" id="bottomBackBtn">📚 返回课程首页</a>
+        </div>
+    </div>
+
+    <script src="js/courses-data.js?v=2"></script>
+    <script src="js/simulations.js?v=2"></script>
+    <script src="js/auth.js?v=9"></script>
     <script>
         (function() {
             // 权限检查
@@ -124,12 +309,20 @@
                 return;
             }
 
+            // 更新返回链接 — 指向正确的课程详情页
+            const courseDetailUrl = 'course-detail.html?id=' + courseId;
+            document.getElementById('topbarBackBtn').href = courseDetailUrl;
+            document.getElementById('bottomBackBtn').href = courseDetailUrl;
+
             // 更新页面信息
-            document.title = `${lesson.topic} - AI机器人成长营`;
-            document.getElementById('lessonTitle').textContent = lesson.topic;
-            document.getElementById('lessonSubtitle').textContent = `${course.code} ${course.title}`;
-            document.getElementById('lessonTopic').textContent = `第${lessonNum}课：${lesson.topic}`;
-            document.getElementById('lessonGoal').innerHTML = `<strong>教学目标：</strong>${lesson.goal}<br><strong>学习成果：</strong>${lesson.outcome}`;
+            document.title = lesson.topic + ' - AI机器人成长营';
+            document.getElementById('topbarTitle').textContent = lesson.topic;
+            document.getElementById('topbarCourse').textContent = course.code + ' ' + course.title;
+            document.getElementById('infoBadge').textContent = course.code + ' · ' + course.ageGroup + '岁';
+            document.getElementById('lessonTopic').textContent = '第' + lessonNum + '课：' + lesson.topic;
+            document.getElementById('lessonGoal').innerHTML =
+                '<strong>🎯 教学目标：</strong>' + lesson.goal + '<br>' +
+                '<strong>✅ 学习成果：</strong>' + lesson.outcome;
 
             // 加载模拟器
             const sim = Simulations.get(courseId, lessonNum);
@@ -141,7 +334,7 @@
                     sim.init(simArea);
                 }
             } else {
-                simArea.innerHTML = '<div class="no-sim"><div class="icon">🔧</div><p>该课件正在开发中，敬请期待！</p></div>';
+                simArea.innerHTML = '<div class="sim-loading"><div class="icon">🔧</div><p>该课件正在开发中，敬请期待！</p></div>';
             }
         })();
     </script>
